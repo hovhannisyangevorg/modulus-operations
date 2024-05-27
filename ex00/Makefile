@@ -23,8 +23,11 @@ $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
 clean:
+	@$(RM) -r $(OBJS)
+
+fclean: clean
 	@$(RM) -r $(BUILD_DIR)
 
-re: clean all
+re: fclean all
 
-.PHONY: all clean re
+.PHONY: all clean fclean re
