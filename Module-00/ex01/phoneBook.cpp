@@ -6,15 +6,27 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 13:21:28 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/28 14:24:00 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/28 17:02:09 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "phoneBook.hpp"
-#include <iostream>
-#include "error.hpp"
+# include <iostream>
+# include "error.hpp"
 
-PhoneBook::PhoneBook() : size_(0) {}
+const char* _NAME_EXPR = "input name: ";
+const char* _SUR_NAME_EXPR = "input surname: ";
+const char* _NUMBER_EXPR = "input phone number: ";
+const char* _NICK_NAME_EXPR = "input nickname: ";
+const char* _SECRET_EXPR = "input darkest secret: ";
+
+const char* _WARNING_NAME_EXPR = "Warning: Wrong name input.";
+const char* _WARNING_SUR_NAME_EXPR = "Warning: Wrong surname input.";
+const char* _WARNING_NUMBER_EXPR = "Warning: Wrong darkest secret input.";
+const char* _WARNING_NICK_NAME_EXPR = "Warning: Wrong number input.";
+const char* _WARNING_SECRET_EXPR = "Warning: Wrong nickname input.";
+
+PhoneBook::PhoneBook() : size_() {}
 
 bool PhoneBook::parse_string(std::string str) {
 	for(size_t i = 0; i < str.length(); i++)
@@ -44,8 +56,6 @@ bool PhoneBook::parce_number(std::string str) {
 void PhoneBook::update_offset(size_t& index) {
 	if (index >= MAX_CONT_COUNT)
 		index = 0;
-	if (this->size_ < MAX_CONT_COUNT)
-		++this->size_;
 }
 
 void PhoneBook::make_word(std::string &print, std::string str2)
@@ -62,22 +72,21 @@ bool PhoneBook::input_reader(size_t index, std::string in_type, std::string wer_
 	while (1) {
 		std::cout << in_type;
 		getline(std::cin, input);
-		if (std::cin.eof()) {
-			return (error.setError(1, "Error: Do not press ctrl + D"),false);
-		}
+		if (std::cin.eof())
+			return (error.setError(1, "Warning: Do not press ctrl + D"), false);
 		if (!this->parse_string(input) || input.empty() || !this->space_case(input)) {
 			std::cout << std::endl;
 			std::cout << wer_type <<std::endl;
 			std::cout << std::endl;
 			continue;
 		}
-		if (in_type == NAME_EXPR)
+		if (in_type == _NAME_EXPR)
 			this->c1[index].set_name(input);
-		else if (in_type == SUR_NAME_EXPR)
+		else if (in_type == _SUR_NAME_EXPR)
 			this->c1[index].set_surname(input);
-		else if (in_type == NICK_NAME_EXPR)
+		else if (in_type == _NICK_NAME_EXPR)
 			this->c1[index].set_nickname(input);
-		else if (in_type == SECRET_EXPR)
+		else if (in_type == _SECRET_EXPR)
 			this->c1[index].set_secret(input);
 		break ;
 	}
@@ -90,9 +99,8 @@ bool PhoneBook::input_phone_number(size_t index, std::string in_type, std::strin
 	while (1) {
 		std::cout << in_type;
 		getline(std::cin, input);
-		if (std::cin.eof()) {
-			return (error.setError(1, "Error: Do not press ctrl + D"),false);
-		}
+		if (std::cin.eof())
+			return (error.setError(1, "Warning: Do not press ctrl + D"), false);
 		if (!this->parce_number(input) || input.empty() || !this->space_case(input)) {
 			std::cout << std::endl;
 			std::cout << wer_type <<std::endl;
@@ -106,17 +114,18 @@ bool PhoneBook::input_phone_number(size_t index, std::string in_type, std::strin
 }
 
 bool PhoneBook::append(size_t &index) {
+
 	update_offset(index);
 
-	if (!input_reader(index, NAME_EXPR, "Warning: Wrong name input."))
+	if (!input_reader(index, _NAME_EXPR, _WARNING_NAME_EXPR))
 		return (false);
-	if (!input_reader(index, SUR_NAME_EXPR, "Warning: Wrong surname input."))
+	if (!input_reader(index, _SUR_NAME_EXPR, _WARNING_SUR_NAME_EXPR))
 		return (false);
-	if (!input_phone_number(index, NUMBER_EXPR, "Warning: Wrong number input."))
+	if (!input_phone_number(index, _NUMBER_EXPR, _WARNING_NUMBER_EXPR))
 		return (false);
-	if (!input_reader(index, NICK_NAME_EXPR, "Warning: Wrong nickname input."))
+	if (!input_reader(index, _NICK_NAME_EXPR, _WARNING_NICK_NAME_EXPR))
 		return (false);
-	if (!input_reader(index, SECRET_EXPR, "Warning: Wrong darkest secret input."))
+	if (!input_reader(index, _SECRET_EXPR, _WARNING_SECRET_EXPR))
 		return (false);
 	index++;
 	std::cout << std::endl;
@@ -131,131 +140,43 @@ bool PhoneBook::exit() {
 bool PhoneBook::search() {
 	std::string temp;
 	std::string print;
-	// int index = 0;
+	int index = 0;
 	
 	std::cout << std::endl;
-	std::cout << "|  index   |   name   | surname  | nickname |" << std::endl;
-	// for (size_t k = 0; k < this->size_; k++)
-	// {
-	// 	std::cout << " ---------- ---------- ---------- ---------- " << std::endl;
-	// 	std::cout << "|"<< std::setw(10) << k << "|" << std::setw(10); 
-	// 	make_word(print, c1[k].get_name());
-	// 	std::cout << print << "|" << std::setw(10);
-	// 	make_word(print, c1[k].get_surname());
-	// 	std::cout << print << "|" << std::setw(10);
-	// 	make_word(print, c1[k].get_nickname());
-	// 	std::cout << print << "|" <<std::endl;
-	// }
-	// std::cout << " ---------- ---------- ---------- ---------- " << std::endl << std::endl; 
-	// if (this->size_ != 0)
-	// {
-	// 	while(1) {
-	// 		std::cout << "input index for more information: ";
-	// 		std::getline(std::cin, temp);
-	// 		if (std::cin.eof())
-	// 			std::exit(1);
-	// 		index = std::atoi(temp.c_str());
-	// 		if(index >= (int)this->size_ || temp.empty() || std::isalpha(temp[0]) || index < 0 || !space_case(temp)) {
-	// 			std::cout << "wrong index input." << std::endl;
-	// 			continue ;
-	// 		}
-	// 		std::cout << std::endl;
-	// 		break ;
-	// 	}
-	// 	std::cout << "name -> " << c1[index].get_name() << std::endl;
-	// 	std::cout << "surname -> " << c1[index].get_surname() << std::endl;
-	// 	std::cout << "number -> " << c1[index].get_number() << std::endl;
-	// 	std::cout << "nickname -> " << c1[index].get_nickname() << std::endl;
-	// 	std::cout << "secret -> " << c1[index].get_secret() << std::endl;
-	// 	std::cout << std::endl;
-	// }
+	std::cout << "|  Index   |   Name   | SurName  | NickName |" << std::endl;
+	for (size_t k = 0; k < this->size_; k++)
+	{
+		std::cout << " ---------- ---------- ---------- ---------- " << std::endl;
+		std::cout << "|"<< std::setw(10) << k << "|" << std::setw(10); 
+		make_word(print, c1[k].get_name());
+		std::cout << print << "|" << std::setw(10);
+		make_word(print, c1[k].get_surname());
+		std::cout << print << "|" << std::setw(10);
+		make_word(print, c1[k].get_nickname());
+		std::cout << print << "|" <<std::endl;
+	}
+	std::cout << " ---------- ---------- ---------- ---------- " << std::endl << std::endl; 
+	if (this->size_ != 0)
+	{
+		while(1) {
+			std::cout << "Input index for more information: ";
+			std::getline(std::cin, temp);
+			if (std::cin.eof())
+				return (error.setError(1, "Warning: Do not press ctrl + D"), false);
+			index = std::atoi(temp.c_str());
+			if(index >= (int)this->size_ || temp.empty() || std::isalpha(temp[0]) || index < 0 || !space_case(temp)) {
+				std::cout << "Error: Wrong index input." << std::endl;
+				continue ;
+			}
+			std::cout << std::endl;
+			break ;
+		}
+		std::cout << "name -> " << c1[index].get_name() << std::endl;
+		std::cout << "surname -> " << c1[index].get_surname() << std::endl;
+		std::cout << "number -> " << c1[index].get_number() << std::endl;
+		std::cout << "nickname -> " << c1[index].get_nickname() << std::endl;
+		std::cout << "secret -> " << c1[index].get_secret() << std::endl;
+		std::cout << std::endl;
+	}
 	return (true);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// void PhoneBook::search(int count)
-// {
-// 	std::string temp;
-// 	std::string print;
-// 	int index = 0;
-	
-// 	std::cout << std::endl;
-// 	std::cout << "|  index   |   name   | surname  | nickname |" << std::endl;
-// 	for (int k = 0; k < count; k++)
-// 	{
-// 		std::cout << " ---------- ---------- ---------- ---------- " << std::endl;
-// 		std::cout << "|"<< std::setw(10) << k << "|" << std::setw(10); 
-// 		make_word(print, c1[k].get_name());
-// 		std::cout << print << "|" << std::setw(10);
-// 		make_word(print, c1[k].get_surname());
-// 		std::cout << print << "|" << std::setw(10);
-// 		make_word(print, c1[k].get_nickname());
-// 		std::cout << print << "|" <<std::endl;
-// 	}
-// 	std::cout << " ---------- ---------- ---------- ---------- " << std::endl << std::endl; 
-// 	if (count != 0)
-// 	{
-// 		while(1)
-// 		{ 
-// 			std::cout << "input index for more information: ";
-// 			std::getline(std::cin, temp);
-// 			if (std::cin.eof())
-// 				exit(1);
-// 			index = std::atoi(temp.c_str());
-// 			if(index >= count || temp.empty() || std::isalpha(temp[0]) || index < 0 || !space_case(temp))
-// 			{
-// 				std::cout << "wrong index input." << std::endl;
-// 				continue;
-// 			}
-// 			std::cout << std::endl;
-// 			break;
-// 		}
-// 		std::cout << "name -> " << c1[index].get_name() << std::endl;
-// 		std::cout << "surname -> " << c1[index].get_surname() << std::endl;
-// 		std::cout << "number -> " << c1[index].get_number() << std::endl;
-// 		std::cout << "nickname -> " << c1[index].get_nickname() << std::endl;
-// 		std::cout << "secret -> " << c1[index].get_secret() << std::endl;
-// 		std::cout << std::endl;
-// 	}
-// }

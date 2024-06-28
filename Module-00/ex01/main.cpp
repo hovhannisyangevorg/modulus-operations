@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 20:16:26 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/27 21:50:56 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/28 16:05:43 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int main() {
 		std::getline(std::cin, command);
 
 		if (std::cin.eof())
-			error.setError(1, "Do not press ctrl + D");
+			error.setError(1, "Warning: Do not press ctrl + D");
 		route.set_command(command);
 		if (error.hasError() || !route.cmd_route(book, index)) {
 			if (error.getCode() == 1) {
@@ -44,6 +44,5 @@ int main() {
 				continue ;
 			}
 		}
-		std::cout << command;
 	}
 }

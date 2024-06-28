@@ -6,7 +6,6 @@
 
 const int MAX_CONT_COUNT = 8;
 
-
 class PhoneBook
 {
 	private:

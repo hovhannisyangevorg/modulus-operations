@@ -3,12 +3,6 @@
 
 # include <string>
 
-const char* NAME_EXPR = "input name: ";
-const char* SUR_NAME_EXPR = "input surname: ";
-const char* NICK_NAME_EXPR = "input nickname: ";
-const char* SECRET_EXPR = "input darkest secret: ";
-const char* NUMBER_EXPR = "input phone number: ";
-
 class Contact
 {
 	private:
