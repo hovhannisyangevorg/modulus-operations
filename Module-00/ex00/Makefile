@@ -1,13 +1,9 @@
-# Name of the executable
-NAME := megaphone
-# Directory for object files and the executable
+NAME := Megaphone
 BUILD_DIR := build
 
-# Source files and Object files
 SRCS := $(wildcard *.cpp)
 OBJS := $(patsubst %.cpp,$(BUILD_DIR)/%.o,$(SRCS))
 
-# Compiler and flags
 CPP := c++
 CPPFLAGS := -Wall -Wextra -Werror -std=c++98
 

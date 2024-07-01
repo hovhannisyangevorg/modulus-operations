@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 13:21:28 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/28 17:02:09 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/28 20:43:09 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ const char* _SECRET_EXPR = "input darkest secret: ";
 
 const char* _WARNING_NAME_EXPR = "Warning: Wrong name input.";
 const char* _WARNING_SUR_NAME_EXPR = "Warning: Wrong surname input.";
-const char* _WARNING_NUMBER_EXPR = "Warning: Wrong darkest secret input.";
-const char* _WARNING_NICK_NAME_EXPR = "Warning: Wrong number input.";
-const char* _WARNING_SECRET_EXPR = "Warning: Wrong nickname input.";
+const char* _WARNING_NUMBER_EXPR = "Warning: Wrong number input.";
+const char* _WARNING_NICK_NAME_EXPR = "Warning: Wrong nickname input.";
+const char* _WARNING_SECRET_EXPR = "Warning: Wrong darkest secret input.";
 
 PhoneBook::PhoneBook() : size_() {}
 
@@ -56,6 +56,8 @@ bool PhoneBook::parce_number(std::string str) {
 void PhoneBook::update_offset(size_t& index) {
 	if (index >= MAX_CONT_COUNT)
 		index = 0;
+	if (this->size_ < 8)
+		++this->size_;
 }
 
 void PhoneBook::make_word(std::string &print, std::string str2)

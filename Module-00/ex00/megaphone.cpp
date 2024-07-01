@@ -10,20 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string>
 #include <iostream>
 
-const std::string Headre = "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
+const char* _HEADRE = "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
 
-void toUpperCase(char* str)
-{
+void toUpperCase(char* str) {
 	for (size_t i = 0; i < std::strlen(str); ++i)
 		str[i] = std::toupper(str[i]);
 }
 
 int main(int argc, char **argv) {
 	if (argc == 1)
-		std::cout << Headre << std::endl;
+		std::cout << _HEADRE << std::endl;
 	else {
 		for (int i = 1; i < argc; ++i) {
 			toUpperCase(argv[i]);
@@ -33,4 +31,5 @@ int main(int argc, char **argv) {
 		}
 		std::cout << std::endl;
 	}
+	return (0);
 }

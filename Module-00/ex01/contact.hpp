@@ -12,14 +12,12 @@ class Contact
 		std::string	secret;
 		std::string number;
 	public:
-		// Setter methods prototype
 		void set_name(const std::string& name);
 		void set_surname(const std::string& surname);
 		void set_nickname(const std::string& nickname);
 		void set_secret(const std::string& secret);
 		void set_number(const std::string& number);
 
-		// Getter methods prototype
 		std::string get_name() const;
 		std::string get_surname() const;
 		std::string get_nickname() const;

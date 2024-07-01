@@ -10,8 +10,8 @@ class Error {
 	public:
 		Error();
 		void setError(int code, const std::string& message);
-		bool hasError() const;
 		int getCode() const;
+		bool hasError() const;
 		std::string getMessage() const;
 };
 
