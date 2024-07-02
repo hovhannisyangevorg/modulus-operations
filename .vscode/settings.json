@@ -68,6 +68,8 @@
         "optional": "cpp",
         "ratio": "cpp",
         "string_view": "cpp",
-        "iomanip": "cpp"
+        "iomanip": "cpp",
+        "filesystem": "cpp",
+        "stack": "cpp"
     }
 }

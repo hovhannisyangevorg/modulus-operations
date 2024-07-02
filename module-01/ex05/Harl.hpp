@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/01 18:42:48 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/07/02 18:34:09 by gehovhan         ###   ########.fr       */
+/*   Created: 2024/07/02 16:41:14 by gehovhan          #+#    #+#             */
+/*   Updated: 2024/07/02 18:03:55 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#ifndef HARL_HPP
+#define HARL_HPP
 
-int main() {
-	Zombie *z1;
-	z1 = newZombie("Narek");
-	z1->announce();
-	randomChump("Mher");
-	delete z1;	
-	return (0);
-}
+#include <iostream>
+#include <string>
+#include <cstdlib>
+
+class Harl {
+	private:
+		void debug(void);
+		void info(void);
+		void warning(void);
+		void error(void);
+	public:
+		void complain(std::string level);
+};
+
+#endif

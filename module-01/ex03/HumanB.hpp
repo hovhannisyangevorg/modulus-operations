@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   HumanB.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/01 18:42:48 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/07/02 18:34:09 by gehovhan         ###   ########.fr       */
+/*   Created: 2024/07/02 15:24:05 by gehovhan          #+#    #+#             */
+/*   Updated: 2024/07/02 16:11:18 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#ifndef HUMANB_HPP
+#define HUMANB_HPP
 
-int main() {
-	Zombie *z1;
-	z1 = newZombie("Narek");
-	z1->announce();
-	randomChump("Mher");
-	delete z1;	
-	return (0);
-}
+#include "Weapon.hpp"
+
+class HumanB {
+    private:
+        std::string h_name;
+        Weapon *wp;
+    public:
+        HumanB(std::string name);
+        void setWeapon(Weapon &club);
+        void attack();
+};
+
+#endif
