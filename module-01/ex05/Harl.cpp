@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:41:26 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/07/02 18:03:46 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/07/02 18:43:45 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,12 @@ void Harl::error(void) { std::cout << std::endl << "This is unacceptable! I want
 void Harl::complain(std::string level) {
     std::string arr[] = {"DEBUG","INFO","WARNING","ERROR","NULL"};
     int i = 0;
-    void(Harl::*fptr[])(void)= {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+    void(Harl::*fptr[])(void)= {
+        &Harl::debug,
+        &Harl::info,
+        &Harl::warning,
+        &Harl::error
+    };
     while (level != arr[i] && arr[i] != "NULL")
         i++;
     switch (i) {

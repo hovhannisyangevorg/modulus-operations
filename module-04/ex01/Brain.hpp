@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/02 17:56:04 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/07/02 18:43:14 by gehovhan         ###   ########.fr       */
+/*   Created: 2024/07/31 18:47:52 by gehovhan          #+#    #+#             */
+/*   Updated: 2024/07/31 19:46:57 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Harl.hpp"
+#ifndef BRAIN_HPP
+# define BRAIN_HPP
 
-int main(int argc, char **argv) {
-	Harl h1;
+#include <iostream>
 
-	if (argc !=  2) {
-		std::cout << "ERROR" << std::endl;
-		return (1);
-	}
-	h1.complain(argv[1]);
-	return (0);
-}
+class Brain
+{
+	private:
+		std::string idea[100];
+
+	public:
+		Brain();
+		Brain(const Brain &other);
+		~Brain();
+		Brain& operator =(const Brain &other);
+		
+		void	setIdea(std::string &idea, const int Index);
+		std::string getIdea(const int Index);
+};
+
+#endif

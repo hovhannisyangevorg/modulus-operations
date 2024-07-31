@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/02 17:56:04 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/07/02 18:43:14 by gehovhan         ###   ########.fr       */
+/*   Created: 2024/07/31 19:53:04 by gehovhan          #+#    #+#             */
+/*   Updated: 2024/07/31 19:53:05 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Harl.hpp"
+#ifndef _WRONGCAT_HPP
+#define _WRONGCAT_HPP
 
-int main(int argc, char **argv) {
-	Harl h1;
+#include "WrongAnimal.hpp"
 
-	if (argc !=  2) {
-		std::cout << "ERROR" << std::endl;
-		return (1);
-	}
-	h1.complain(argv[1]);
-	return (0);
-}
+class WrongCat : public WrongAnimal {
+	public:
+		WrongCat();
+		WrongCat(const WrongCat &other);
+		WrongCat &operator = (const WrongCat &other);
+		~WrongCat();
+		void makeSound() const; 
+};
+
+#endif

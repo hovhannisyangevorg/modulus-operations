@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/02 17:56:04 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/07/02 18:43:14 by gehovhan         ###   ########.fr       */
+/*   Created: 2024/07/03 15:50:07 by gehovhan          #+#    #+#             */
+/*   Updated: 2024/07/03 16:04:52 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Harl.hpp"
+#ifndef __FIXED_HPP__
+#define __FIXED_HPP__
 
-int main(int argc, char **argv) {
-	Harl h1;
+#include <iostream>
 
-	if (argc !=  2) {
-		std::cout << "ERROR" << std::endl;
-		return (1);
-	}
-	h1.complain(argv[1]);
-	return (0);
-}
+class Fixed
+{
+	private:
+		int _RawBits_;
+		static const int _bits_;
+	public:
+		Fixed();
+		Fixed(const Fixed &other);
+		Fixed &operator = (const Fixed &other);
+		~Fixed();
+		int getRawBits( void ) const;
+		void setRawBits( int const raw );
+};
+
+#endif

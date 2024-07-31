@@ -5,20 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/02 17:56:04 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/07/02 18:43:14 by gehovhan         ###   ########.fr       */
+/*   Created: 2024/07/31 19:55:42 by gehovhan          #+#    #+#             */
+/*   Updated: 2024/07/31 20:15:16 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Harl.hpp"
+#include <iostream>
 
-int main(int argc, char **argv) {
-	Harl h1;
+class Animal {
+    public:
+        void foo();
+};
 
-	if (argc !=  2) {
-		std::cout << "ERROR" << std::endl;
-		return (1);
-	}
-	h1.complain(argv[1]);
-	return (0);
+void Animal::foo() {
+    std::cout << "foo" << std::endl;
+}
+
+int main() {
+    Animal a;
+    a.foo();
+    // return 0;
 }

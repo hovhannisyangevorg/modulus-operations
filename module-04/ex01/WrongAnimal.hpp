@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/02 17:56:04 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/07/02 18:43:14 by gehovhan         ###   ########.fr       */
+/*   Created: 2024/07/31 18:48:36 by gehovhan          #+#    #+#             */
+/*   Updated: 2024/07/31 19:48:13 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Harl.hpp"
+#ifndef WRONGANIMAL_HPP
+#define WRONGANIMAL_HPP
 
-int main(int argc, char **argv) {
-	Harl h1;
+#include <iostream>
 
-	if (argc !=  2) {
-		std::cout << "ERROR" << std::endl;
-		return (1);
-	}
-	h1.complain(argv[1]);
-	return (0);
-}
+class WrongAnimal {
+	protected:
+		std::string type;
+	public:
+		WrongAnimal();
+		WrongAnimal(const WrongAnimal &other);
+		WrongAnimal &operator = (const WrongAnimal &other);
+		virtual ~WrongAnimal();
+		void makeSound() const; 
+		void setType(const std::string &type);
+		std::string getType() const;
+};
+
+#endif
