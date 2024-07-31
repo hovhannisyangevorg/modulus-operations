@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 19:55:42 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/07/31 20:29:06 by gehovhan         ###   ########.fr       */
+/*   Created: 2024/07/31 20:23:50 by gehovhan          #+#    #+#             */
+/*   Updated: 2024/07/31 20:24:03 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+#ifndef BRAIN_HPP
+# define BRAIN_HPP
 
-int main()
-{
-    // Abstract a; <--- Invalid declaration
-	Animal **m = new Animal*[100];
-    for (int i = 0; i < 50; i++)
-        m[i] = new Cat();
-    for (int i = 50; i < 100; i++)
-        m[i] = new Dog();
-    for (int i = 0; i < 100; i++)
-    {
-        m[i]->makeSound();
-        delete m[i];
-    }
-    delete [] m;
-	return (0);
-}
+#include <iostream>
+
+class Brain {
+    private:
+	    std::string idea[100];
+
+    public:
+        Brain();
+        Brain(const Brain &other);
+        ~Brain();
+        Brain& operator =(const Brain &other);
+        
+        void	setIdea(std::string &idea, const int Index);
+        std::string getIdea(const int Index);
+};
+
+#endif
