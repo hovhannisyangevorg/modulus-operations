@@ -4,7 +4,7 @@
 
 int main() {
     try {
-        Bureaucrat b("John", 50);
+        Bureaucrat b("John", 151);
         std::cout << b << std::endl;
 
         b.incrementGrade();
