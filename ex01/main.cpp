@@ -1,9 +1,12 @@
-//
-// Created by Gevorg Hovhannisyan on 8/5/24.
-//
-
 #include <iostream>
 
+#include "Bureaucrat.hpp"
+#include "Form.hpp"
+
 int main() {
-    std::cout << "Hello ex01" << std::endl;
+    Bureaucrat A("A", 20);
+    Form taxForm("Name", false, 10, 10);
+
+
+    return 0;
 }

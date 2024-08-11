@@ -1,6 +1,7 @@
 #include <iostream>
 #include <exception>
 #include "Bureaucrat.hpp"
+#include <fstream>
 
 int main() {
     try {

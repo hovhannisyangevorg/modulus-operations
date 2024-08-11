@@ -7,12 +7,12 @@ OBJS := $(patsubst %.cpp,$(BUILD_DIR)/%.o,$(SRCS))
 CPP := c++
 CPPFLAGS := -Wall -Wextra -Werror -std=c++98
 
-all: $(BUILD_DIR)/$(NAME)
+all: $(NAME)
 
 $(BUILD_DIR)/%.o: %.cpp | $(BUILD_DIR)
 	$(CPP) $(CPPFLAGS) -c $< -o $@
 
-$(BUILD_DIR)/$(NAME): $(OBJS)
+$(NAME): $(OBJS)
 	$(CPP) $(OBJS) $(CPPFLAGS) -o $@
 
 $(BUILD_DIR):
@@ -23,6 +23,7 @@ clean:
 
 fclean: clean
 	@$(RM) -r $(BUILD_DIR)
+	@$(RM) $(NAME)
 
 re: fclean all
 
