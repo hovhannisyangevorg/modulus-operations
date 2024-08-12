@@ -56,3 +56,13 @@ std::ostream& operator <<(std::ostream &os, const AForm& obj) {
     os << "form GradeSign " << obj.getGradeRequiredToSign() << ", form sined " << obj.getSigned() << ".";
     return (os);
 }
+
+void AForm::CheckExec(Bureaucrat const & e) const {
+    if (e.getGrade() > this->gradeRequiredToExecute)
+        throw GradeTooLowException();
+}
+
+void AForm::CheckSign() const {
+    if (!this->signedStatus)
+        throw std::runtime_error("Error: AForm cannot be signed\n");
+}

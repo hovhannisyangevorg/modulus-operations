@@ -4,9 +4,8 @@
 #include <string>
 #include <iostream>
 #include "CheckGrade.hpp"
-//#include "Bureaucrat.hpp"
 
-class AForm : public Checker {
+class AForm {
     private:
         const std::string   name;
         bool                signedStatus;
@@ -27,11 +26,13 @@ class AForm : public Checker {
 
         // Override Checker for Form
         void                CheckGrade(unsigned short grade) const;
+        void                CheckExec(class Bureaucrat const& e) const;
+        void                CheckSign() const;
 
-        // logic
-        void beSigned(class Bureaucrat &b);
+        // Logic
+        void                beSigned(class Bureaucrat &b);
 
-
+        // Exceptions
         class GradeTooHighException : public std::exception {
             virtual const char *what() const throw();
         };
@@ -41,8 +42,10 @@ class AForm : public Checker {
         };
 
         AForm& operator =(const AForm& other);
+
+        virtual void execute(Bureaucrat const & executor) const;
 };
 
 std::ostream &operator<<(std::ostream &os, const AForm &form);
 
-#endif //INTRA_UUID_D1C3D73E_631C_4B23_8EB6_7989965F2A99_5891587_GEHOVHAN_FORM_H
+#endif // INTRA_UUID_D1C3D73E_631C_4B23_8EB6_7989965F2A99_5891587_GEHOVHAN_FORM_H
