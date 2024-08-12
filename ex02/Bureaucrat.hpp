@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "CheckGrade.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
 class Bureaucrat : public Checker {
@@ -31,7 +31,7 @@ class Bureaucrat : public Checker {
             public:
                 virtual const char* what() const throw();
         };
-        void signForm(const Form& form) const;
+        void signForm(const AForm& form) const;
         Bureaucrat& operator =(const Bureaucrat& other);
 };
 

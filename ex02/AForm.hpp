@@ -1,12 +1,12 @@
-#ifndef INTRA_UUID_D1C3D73E_631C_4B23_8EB6_7989965F2A99_5891587_GEHOVHAN_FORM_H
-#define INTRA_UUID_D1C3D73E_631C_4B23_8EB6_7989965F2A99_5891587_GEHOVHAN_FORM_H
+#ifndef INTRA_UUID_D1C3D73E_631C_4B23_8EB6_7989965F2A99_5891587_GEHOVHAN_AFORM_H
+#define INTRA_UUID_D1C3D73E_631C_4B23_8EB6_7989965F2A99_5891587_GEHOVHAN_AFORM_H
 
 #include <string>
 #include <iostream>
 #include "CheckGrade.hpp"
 //#include "Bureaucrat.hpp"
 
-class Form : public Checker {
+class AForm : public Checker {
     private:
         const std::string   name;
         bool                signedStatus;
@@ -14,10 +14,10 @@ class Form : public Checker {
         const int           gradeRequiredToExecute;
 
     public:
-        Form();
-        Form(const Form &other);
-        Form(const std::string &name, bool gradeToSign, int gradeRequiredToSign, int gradeRequiredToExecute);
-        ~Form();
+        AForm();
+        AForm(const AForm &other);
+        AForm(const std::string &name, bool gradeToSign, int gradeRequiredToSign, int gradeRequiredToExecute);
+        ~AForm();
 
         // Getters
         const std::string   &getName() const;
@@ -31,6 +31,7 @@ class Form : public Checker {
         // logic
         void beSigned(class Bureaucrat &b);
 
+
         class GradeTooHighException : public std::exception {
             virtual const char *what() const throw();
         };
@@ -39,9 +40,9 @@ class Form : public Checker {
             virtual const char *what() const throw();
         };
 
-        Form& operator =(const Form& other);
+        AForm& operator =(const AForm& other);
 };
 
-std::ostream &operator<<(std::ostream &os, const Form &form);
+std::ostream &operator<<(std::ostream &os, const AForm &form);
 
 #endif //INTRA_UUID_D1C3D73E_631C_4B23_8EB6_7989965F2A99_5891587_GEHOVHAN_FORM_H
