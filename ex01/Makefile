@@ -1,4 +1,4 @@
-NAME := ex01
+NAME := bureaucrat
 BUILD_DIR := build
 
 SRCS := $(wildcard *.cpp)

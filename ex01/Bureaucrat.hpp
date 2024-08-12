@@ -3,10 +3,12 @@
 
 #include <iostream>
 #include "CheckGrade.hpp"
+#include "Form.hpp"
+#include "Bureaucrat.hpp"
 
 class Bureaucrat : public Checker {
     private:
-        const std::string _name_;
+        std::string _name_;
         unsigned short _grade_;
 
     public:
@@ -29,6 +31,8 @@ class Bureaucrat : public Checker {
             public:
                 virtual const char* what() const throw();
         };
+        void signForm(const Form& form) const;
+        Bureaucrat& operator =(const Bureaucrat& other);
 };
 
 std::ostream& operator<<(std::ostream &os, const Bureaucrat &bureaucrat);

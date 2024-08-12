@@ -28,11 +28,33 @@ void Form::CheckGrade(unsigned short grade) const {
         throw Form::GradeTooLowException();
 }
 
+void Form::beSigned(Bureaucrat &b) {
+    if (this->gradeRequiredToSign > b.getGrade()) {
+        this->signedStatus = true;
+        return ;
+    }
+    throw Form::GradeTooLowException();
+}
+
 const char* Form::GradeTooLowException::what() const throw() {
-    return "Form: Grade is too low!";
+    return "Error: Form: Grade is too low!";
 }
 
 const char* Form::GradeTooHighException::what() const throw() {
-    return "Form: Grade is too high!";
+    return "Error: Form: Grade is too high!";
 }
 
+Form& Form::operator =(const Form& other)
+{
+    if (this == &other)
+        return *this;
+    this->signedStatus = other.getSigned();
+    return *this;
+}
+
+std::ostream& operator <<(std::ostream &os, const Form& obj)
+{
+    os << obj.getName() << ", form GradeExec " << obj.getGradeRequiredToExecute() << ", ";
+    os << "form GradeSign " << obj.getGradeRequiredToSign() << ", form sined " << obj.getSigned() << ".";
+    return (os);
+}

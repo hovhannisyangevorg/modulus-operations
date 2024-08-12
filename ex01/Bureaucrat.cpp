@@ -41,15 +41,28 @@ void Bureaucrat::CheckGrade(unsigned short grade) const {
 
 // Exception messages
 const char* Bureaucrat::GradeTooHighException::what() const throw() {
-    return "Bureaucrat: Grade is too high!";
+    return "Error: Bureaucrat: Grade is too high!";
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw() {
-    return "Bureaucrat: Grade is too low!";
+    return "Error: Bureaucrat: Grade is too low!";
+}
+
+void Bureaucrat::signForm(const Form& form) const {
+    if (form.getSigned())
+        std::cout << this->_name_ << " signed " << form.getName() << std::endl;
+    else
+        std::cout << this->_name_ << " couldn't sign " << form.getName() <<  " because low grade." << std::endl;
 }
 
 // Overloaded output operator
-std::ostream& operator<<(std::ostream &os, const Bureaucrat &bureaucrat) {
+std::ostream& operator<< (std::ostream &os, const Bureaucrat &bureaucrat) {
     os << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade();
     return os;
+}
+
+Bureaucrat& Bureaucrat::operator = (const Bureaucrat& other) {
+    this->_grade_ = other.getGrade();
+    this->_name_ = other.getName();
+    return *this;
 }

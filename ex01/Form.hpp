@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include "CheckGrade.hpp"
+//#include "Bureaucrat.hpp"
 
 class Form : public Checker {
     private:
@@ -24,7 +25,11 @@ class Form : public Checker {
         int                 getGradeRequiredToSign() const;
         int                 getGradeRequiredToExecute() const;
 
-        void CheckGrade(unsigned short grade) const;
+        // Override Checker for Form
+        void                CheckGrade(unsigned short grade) const;
+
+        // logic
+        void beSigned(class Bureaucrat &b);
 
         class GradeTooHighException : public std::exception {
             virtual const char *what() const throw();
@@ -34,6 +39,7 @@ class Form : public Checker {
             virtual const char *what() const throw();
         };
 
+        Form& operator =(const Form& other);
 };
 
 std::ostream &operator<<(std::ostream &os, const Form &form);
