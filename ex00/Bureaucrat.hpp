@@ -8,14 +8,14 @@
 class Bureaucrat {
     private:
         const std::string _name_;
-        unsigned short _grade_;
-        void checkGrade(unsigned short grade) const;
+        short _grade_;
+        void checkGrade(short grade) const;
 
     public:
-        Bureaucrat(const std::string &name, unsigned short grade);
+        Bureaucrat(const std::string &name, short grade);
         ~Bureaucrat();
         const std::string& getName() const;
-        unsigned short getGrade() const;
+        short getGrade() const;
 
         void incrementGrade();
         void decrementGrade();

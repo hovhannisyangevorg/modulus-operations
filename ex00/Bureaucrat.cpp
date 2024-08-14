@@ -1,7 +1,7 @@
 #include "Bureaucrat.hpp"
 
 // Constructor
-Bureaucrat::Bureaucrat(const std::string &name, unsigned short grade) : _name_(name) {
+Bureaucrat::Bureaucrat(const std::string &name, short grade) : _name_(name) {
     checkGrade(grade);  // Perform validation
     _grade_ = grade;
 }
@@ -15,7 +15,7 @@ const std::string& Bureaucrat::getName() const {
 }
 
 // Get grade
-unsigned short Bureaucrat::getGrade() const {
+short Bureaucrat::getGrade() const {
     return _grade_;
 }
 
@@ -32,11 +32,11 @@ void Bureaucrat::decrementGrade() {
 }
 
 // Check grade validity
-void Bureaucrat::checkGrade(unsigned short grade) const {
+void Bureaucrat::checkGrade(short grade) const {
     if (grade < 1)
-        throw GradeTooHighException();
-    if (grade > 150)
         throw GradeTooLowException();
+    if (grade > 150)
+        throw GradeTooHighException();
 }
 
 // Exception messages
