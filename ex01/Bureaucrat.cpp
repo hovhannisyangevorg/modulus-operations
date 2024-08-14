@@ -15,7 +15,7 @@ const std::string& Bureaucrat::getName() const {
 }
 
 // Get grade
-unsigned short Bureaucrat::getGrade() const {
+short Bureaucrat::getGrade() const {
     return _grade_;
 }
 
@@ -32,11 +32,12 @@ void Bureaucrat::decrementGrade() {
 }
 
 // Check grade validity
-void Bureaucrat::CheckGrade(unsigned short grade) const {
+void Bureaucrat::CheckGrade(short grade) const {
+
     if (grade < 1)
-        throw Bureaucrat::GradeTooHighException();
-    if (grade > 150)
         throw Bureaucrat::GradeTooLowException();
+    if (grade > 150)
+        throw Bureaucrat::GradeTooHighException();
 }
 
 // Exception messages

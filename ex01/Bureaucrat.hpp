@@ -2,25 +2,23 @@
 #define INTRA_UUID_D1C3D73E_631C_4B23_8EB6_7989965F2A99_5891587_GEHOVHAN_BUREAUCRAT_H
 
 #include <iostream>
-#include "CheckGrade.hpp"
 #include "Form.hpp"
-#include "Bureaucrat.hpp"
 
-class Bureaucrat : public Checker {
+class Bureaucrat {
     private:
         std::string _name_;
-        unsigned short _grade_;
+        short _grade_;
 
     public:
         Bureaucrat(const std::string &name, unsigned short grade);
         ~Bureaucrat();
         const std::string& getName() const;
-        unsigned short getGrade() const;
+        short getGrade() const;
 
         void incrementGrade();
         void decrementGrade();
 
-        void CheckGrade(unsigned short grade) const;
+        void CheckGrade(short grade) const;
 
         class GradeTooHighException : public std::exception {
             public:

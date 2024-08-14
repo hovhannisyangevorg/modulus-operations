@@ -3,10 +3,8 @@
 
 #include <string>
 #include <iostream>
-#include "CheckGrade.hpp"
-//#include "Bureaucrat.hpp"
 
-class Form : public Checker {
+class Form {
     private:
         const std::string   name;
         bool                signedStatus;
@@ -26,7 +24,7 @@ class Form : public Checker {
         int                 getGradeRequiredToExecute() const;
 
         // Override Checker for Form
-        void                CheckGrade(unsigned short grade) const;
+        void                CheckGrade(short grade) const;
 
         // logic
         void beSigned(class Bureaucrat &b);

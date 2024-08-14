@@ -21,11 +21,11 @@ int Form::getGradeRequiredToSign() const { return this->gradeRequiredToSign; }
 int Form::getGradeRequiredToExecute() const { return this->gradeRequiredToExecute; }
 
 // Check grade validity
-void Form::CheckGrade(unsigned short grade) const {
+void Form::CheckGrade(short grade) const {
     if (grade < 1)
-        throw Form::GradeTooHighException();
-    if (grade > 150)
         throw Form::GradeTooLowException();
+    if (grade > 150)
+        throw Form::GradeTooHighException();
 }
 
 void Form::beSigned(Bureaucrat &b) {
