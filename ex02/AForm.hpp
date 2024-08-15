@@ -1,49 +1,51 @@
 #ifndef INTRA_UUID_D1C3D73E_631C_4B23_8EB6_7989965F2A99_5891587_GEHOVHAN_AFORM_H
 #define INTRA_UUID_D1C3D73E_631C_4B23_8EB6_7989965F2A99_5891587_GEHOVHAN_AFORM_H
 
-#include <string>
-#include <iostream>
+#include "Bureaucrat.hpp"
 
-class AForm {
+class Bureaucrat;
+
+class AForm
+{
     private:
-        const std::string   name;
-        bool                signedStatus;
-        const int           gradeRequiredToSign;
-        const int           gradeRequiredToExecute;
-
+        bool		_signed_;
+        const int	_gradeExec_;
+        const int	_gradeSign_;
+        const std::string	_name_;
     public:
-        AForm();
-        AForm(const AForm &other);
-        AForm(const std::string &name, bool gradeToSign, int gradeRequiredToSign, int gradeRequiredToExecute);
-        ~AForm();
+    AForm();
+    AForm(std::string name, int GradeExec, int GradeSign);
+    AForm(std::string name, bool _signed_, int GradeExec, int GradeSign);
+    AForm(const AForm& other);
+    virtual ~AForm();
+    AForm& operator =(const AForm& other);
 
-        // Getters
-        const std::string   &getName() const;
-        bool                getSigned() const;
-        int                 getGradeRequiredToSign() const;
-        int                 getGradeRequiredToExecute() const;
+    class GradeTooHighException : public std::exception
+    {
+    public:
+        const char * what() const throw();
+    };
 
-        // Override Checker for Form
-        void                CheckGrade(short grade) const;
+    class GradeTooLowException : public std::exception
+    {
+    public:
+        const char * what() const throw();
+    };
 
-        // logic
-        void beSigned(class Bureaucrat &b);
+    bool getSigned() const;
+    int getGradeExec() const;
+    int getGradeSign() const;
+    std::string getName() const;
 
-        class GradeTooHighException : public std::exception {
-            virtual const char *what() const throw();
-        };
+    void checkExec(Bureaucrat const & executor) const;
+    void checkSign() const;
 
-        class GradeTooLowException : public std::exception {
-            virtual const char *what() const throw();
-        };
+    void beSigned(const Bureaucrat &bureaucrat);
 
-        AForm& operator =(const AForm& other);
-
-        virtual void execute(Bureaucrat const & executor) const = 0;
-        void checkExec(Bureaucrat const & executor) const;
-        void checkSign() const;
+    virtual void execute(Bureaucrat const & executor) const = 0;
 };
 
-std::ostream &operator<<(std::ostream &os, const AForm &form);
+std::ostream& operator <<(std::ostream &os, const AForm& obj);
+
 
 #endif //INTRA_UUID_D1C3D73E_631C_4B23_8EB6_7989965F2A99_5891587_GEHOVHAN_AFORM_H
