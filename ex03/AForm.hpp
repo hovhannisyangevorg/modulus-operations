@@ -5,11 +5,12 @@
 
 class Bureaucrat;
 
-class AForm {
+class AForm
+{
     private:
-        bool		        _signed_;
-        const int	        _gradeExec_;
-        const int	        _gradeSign_;
+        bool		_signed_;
+        const int	_gradeExec_;
+        const int	_gradeSign_;
         const std::string	_name_;
     public:
     AForm();
@@ -19,14 +20,16 @@ class AForm {
     virtual ~AForm();
     AForm& operator =(const AForm& other);
 
-    class GradeTooHighException : public std::exception {
-        public:
-            const char * what() const throw();
+    class GradeTooHighException : public std::exception
+    {
+    public:
+        const char * what() const throw();
     };
 
-    class GradeTooLowException : public std::exception {
-        public:
-            const char * what() const throw();
+    class GradeTooLowException : public std::exception
+    {
+    public:
+        const char * what() const throw();
     };
 
     bool getSigned() const;
