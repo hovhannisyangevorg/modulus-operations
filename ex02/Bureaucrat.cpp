@@ -1,52 +1,53 @@
 #include "Bureaucrat.hpp"
 
-// Constructor
-Bureaucrat::Bureaucrat(const std::string &name, unsigned short grade) : _name_(name) {
-    this->CheckGrade(grade);  // Perform validation
-    _grade_ = grade;
+Bureaucrat::Bureaucrat(): _name_("nil"), _grade_(0) {}
+
+Bureaucrat::Bureaucrat(std::string _name_, int _grade_) {
+    if (_grade_ < 0)
+        throw Bureaucrat::GradeTooHighException();
+    if (_grade_ > 150)
+        throw Bureaucrat::GradeTooLowException();
+    this->_grade_ = _grade_;
+    this->_name_ = _name_;
 }
 
-// Destructor
+Bureaucrat::Bureaucrat(const Bureaucrat& other) {
+    this->_grade_ = other._grade_;
+    this->_name_ = other._name_;
+}
+
 Bureaucrat::~Bureaucrat() {}
 
-// Get name
-const std::string& Bureaucrat::getName() const {
-    return _name_;
+Bureaucrat& Bureaucrat::operator =(const Bureaucrat& other) {
+    this->_grade_ = other._grade_;
+    this->_name_ = other._name_;
+    return *this;
 }
 
-// Get grade
-short Bureaucrat::getGrade() const {
-    return _grade_;
+std::string Bureaucrat::getName() const {
+    return this->_name_;
 }
 
-// Increment grade
-void Bureaucrat::incrementGrade() {
-    this->CheckGrade(_grade_ - 1);
-    --_grade_;
+int	Bureaucrat::getGrade() const {
+    return this->_grade_;
 }
 
-// Decrement grade
-void Bureaucrat::decrementGrade() {
-    this->CheckGrade(_grade_ + 1);
-    ++_grade_;
+const char * Bureaucrat::GradeTooLowException::what() const throw () {
+    return "You entered a rating less than required.";
 }
 
-// Check grade validity
-void Bureaucrat::CheckGrade(short grade) const {
+const char * Bureaucrat::GradeTooHighException::what() const throw () {
+    return "You entered a rating that is more than required.";
+}
 
-    if (grade < 1)
-        throw Bureaucrat::GradeTooLowException();
-    if (grade > 150)
+void Bureaucrat::increaseGrade() {
+    if (--this->_grade_ < 1)
         throw Bureaucrat::GradeTooHighException();
 }
 
-// Exception messages
-const char* Bureaucrat::GradeTooHighException::what() const throw() {
-    return "Error: Bureaucrat: Grade is too high!";
-}
-
-const char* Bureaucrat::GradeTooLowException::what() const throw() {
-    return "Error: Bureaucrat: Grade is too low!";
+void Bureaucrat::decreaseGrade() {
+    if (++this->_grade_ > 150)
+        throw Bureaucrat::GradeTooLowException();
 }
 
 void Bureaucrat::signForm(const AForm& form) const {
@@ -56,22 +57,14 @@ void Bureaucrat::signForm(const AForm& form) const {
         std::cout << this->_name_ << " couldn't sign " << form.getName() <<  " because low grade." << std::endl;
 }
 
-// Overloaded output operator
-std::ostream& operator<< (std::ostream &os, const Bureaucrat &bureaucrat) {
-    os << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade();
-    return os;
-}
-
-Bureaucrat& Bureaucrat::operator = (const Bureaucrat& other) {
-    this->_grade_ = other.getGrade();
-    this->_name_ = other.getName();
-    return *this;
-}
-
-void Bureaucrat::executeForm(AForm const & form) const
-{
-    if (form.getGradeRequiredToExecute())
+void Bureaucrat::executeForm(AForm const & form) const {
+    if (form.getGradeExec())
         std::cout << this->_name_ << " executed " << form.getName() << std::endl;
     else
         std::cout << this->_name_ << " failed " << form.getName() << std::endl;
+}
+
+std::ostream& operator <<(std::ostream &os, const Bureaucrat& obj) {
+    os << obj.getName() << ", bureaucrat grade " << obj.getGrade() << ".";
+    return (os);
 }

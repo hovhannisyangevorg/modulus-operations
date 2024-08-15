@@ -2,39 +2,44 @@
 #define INTRA_UUID_D1C3D73E_631C_4B23_8EB6_7989965F2A99_5891587_GEHOVHAN_BUREAUCRAT_H
 
 #include <iostream>
+#include <fstream>
 #include "AForm.hpp"
+
+class AForm;
 
 class Bureaucrat {
     private:
         std::string _name_;
-        short _grade_;
+        int			_grade_;
 
     public:
-        Bureaucrat(const std::string &name, unsigned short grade);
+        Bureaucrat();
+        Bureaucrat(std::string _name_, int _grade_);
+        Bureaucrat(const Bureaucrat& other);
         ~Bureaucrat();
-        const std::string& getName() const;
-        short getGrade() const;
-
-        void incrementGrade();
-        void decrementGrade();
-
-        void CheckGrade(short grade) const;
-
-        class GradeTooHighException : public std::exception {
-            public:
-                virtual const char* what() const throw();
-        };
+        Bureaucrat& operator =(const Bureaucrat& other);
 
         class GradeTooLowException : public std::exception {
             public:
-                virtual const char* what() const throw();
+                const char * what() const throw ();
         };
-        void signForm(const AForm& form) const;
-        Bureaucrat& operator =(const Bureaucrat& other);
 
+        class GradeTooHighException : public std::exception {
+            public:
+                const char * what() const throw ();
+        };
+
+        void increaseGrade();
+        void decreaseGrade();
+
+        std::string getName() const;
+        int			getGrade() const;
+
+        void signForm(const AForm& form) const;
         void executeForm(AForm const & form) const;
 };
 
-std::ostream& operator<<(std::ostream &os, const Bureaucrat &bureaucrat);
+std::ostream& operator <<(std::ostream &os, const Bureaucrat& obj);
+
 
 #endif //INTRA_UUID_D1C3D73E_631C_4B23_8EB6_7989965F2A99_5891587_GEHOVHAN_BUREAUCRAT_H

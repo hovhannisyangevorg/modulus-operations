@@ -8,18 +8,19 @@ CPP := c++
 CPPFLAGS := -Wall -Wextra -Werror -std=c++98
 
 all: $(NAME)
+	@./bureaucrat
 
 $(BUILD_DIR)/%.o: %.cpp | $(BUILD_DIR)
-	$(CPP) $(CPPFLAGS) -c $< -o $@
+	@$(CPP) $(CPPFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	$(CPP) $(OBJS) $(CPPFLAGS) -o $@
+	@$(CPP) $(OBJS) $(CPPFLAGS) -o $@
 
 $(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
+	@mkdir -p $(BUILD_DIR)
 
 clean:
-	@$(RM) -r $(OBJS)
+	@$(RM) -r $(BUILD_DIR)
 
 fclean: clean
 	@$(RM) -r $(BUILD_DIR)
