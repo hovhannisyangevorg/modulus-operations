@@ -8,7 +8,6 @@ CPP := c++
 CPPFLAGS := -Wall -Wextra -Werror -std=c++98
 
 all: $(NAME)
-	@./bureaucrat
 
 $(BUILD_DIR)/%.o: %.cpp | $(BUILD_DIR)
 	@$(CPP) $(CPPFLAGS) -c $< -o $@
