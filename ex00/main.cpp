@@ -5,7 +5,11 @@
 
 int main() {
     try {
-        Bureaucrat b("John", 151);
+        Bureaucrat b1;
+        b1.setGrade(151);
+        std::cout << b1 << std::endl;
+
+        Bureaucrat b("John", 0);
         std::cout << b << std::endl;
 
         b.incrementGrade();
@@ -21,3 +25,6 @@ int main() {
     }
     return 0;
 }
+
+
+

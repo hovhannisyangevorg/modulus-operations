@@ -1,34 +1,46 @@
 #include "Bureaucrat.hpp"
 
-// Constructor
-Bureaucrat::Bureaucrat(const std::string &name, short grade) : _name_(name) {
-    checkGrade(grade);  // Perform validation
-    _grade_ = grade;
-}
+const std::string UNKNOWN = "Unknown";
+
+// Default Constructor
+Bureaucrat::Bureaucrat() : name(UNKNOWN), grade(0) {}
 
 // Destructor
 Bureaucrat::~Bureaucrat() {}
 
+// Parameterized constructor
+Bureaucrat::Bureaucrat(const std::string &name, short grade) : name(name) {
+    checkGrade(grade);
+    this->grade = grade;
+}
+
 // Get name
 const std::string& Bureaucrat::getName() const {
-    return _name_;
+    return name;
 }
 
 // Get grade
 short Bureaucrat::getGrade() const {
-    return _grade_;
+    return grade;
 }
+
+// Set grade
+void Bureaucrat::setGrade(const short g) {
+    checkGrade(g);
+    this->grade = g;
+}
+
 
 // Increment grade
 void Bureaucrat::incrementGrade() {
-    checkGrade(_grade_ - 1);
-    --_grade_;
+    checkGrade(grade - 1);
+    --grade;
 }
 
 // Decrement grade
 void Bureaucrat::decrementGrade() {
-    checkGrade(_grade_ + 1);
-    ++_grade_;
+    checkGrade(grade + 1);
+    ++grade;
 }
 
 // Check grade validity
@@ -53,3 +65,14 @@ std::ostream& operator<<(std::ostream &os, const Bureaucrat &bureaucrat) {
     os << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade();
     return os;
 }
+
+Bureaucrat& Bureaucrat::operator =(const Bureaucrat& o)
+{
+    // We cannot assign to 'name' because it's a constant,
+    if (this != &o) {
+        grade = o.grade;
+    }
+    return *this;
+}
+
+//std::ostream& operator<<(std::ostream &os, const Bureaucrat &bureaucrat);
