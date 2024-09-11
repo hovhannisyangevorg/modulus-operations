@@ -19,7 +19,7 @@ class Form {
 
         // Getters
         const std::string   &getName() const;
-        bool                getSigned() const;
+        bool                getSignedStatus() const;
         int                 getGradeRequiredToSign() const;
         int                 getGradeRequiredToExecute() const;
 

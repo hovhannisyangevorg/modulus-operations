@@ -1,9 +1,14 @@
 #include "Bureaucrat.hpp"
 
+const std::string UNKNOWN = "Unknown";
+
+// Default Constructor
+Bureaucrat::Bureaucrat() : name(UNKNOWN), grade(0) {}
+
 // Constructor
-Bureaucrat::Bureaucrat(const std::string &name, unsigned short grade) : _name_(name) {
+Bureaucrat::Bureaucrat(const std::string &name, unsigned short grade) : name(name) {
     this->CheckGrade(grade);  // Perform validation
-    _grade_ = grade;
+    this->grade = grade;
 }
 
 // Destructor
@@ -11,29 +16,34 @@ Bureaucrat::~Bureaucrat() {}
 
 // Get name
 const std::string& Bureaucrat::getName() const {
-    return _name_;
+    return this->name;
 }
 
 // Get grade
 short Bureaucrat::getGrade() const {
-    return _grade_;
+    return this->grade;
+}
+
+// Set grade
+void Bureaucrat::setGrade(const short g) {
+    this->CheckGrade(g);
+    this->grade = g;
 }
 
 // Increment grade
 void Bureaucrat::incrementGrade() {
-    this->CheckGrade(_grade_ - 1);
-    --_grade_;
+    this->CheckGrade(this->grade - 1);
+    --this->grade;
 }
 
 // Decrement grade
 void Bureaucrat::decrementGrade() {
-    this->CheckGrade(_grade_ + 1);
-    ++_grade_;
+    this->CheckGrade(this->grade + 1);
+    ++this->grade;
 }
 
 // Check grade validity
 void Bureaucrat::CheckGrade(short grade) const {
-
     if (grade < 1)
         throw Bureaucrat::GradeTooLowException();
     if (grade > 150)
@@ -50,10 +60,10 @@ const char* Bureaucrat::GradeTooLowException::what() const throw() {
 }
 
 void Bureaucrat::signForm(const Form& form) const {
-    if (form.getSigned())
-        std::cout << this->_name_ << " signed " << form.getName() << std::endl;
+    if (form.getSignedStatus())
+        std::cout << this->name << " signed " << form.getName() << std::endl;
     else
-        std::cout << this->_name_ << " couldn't sign " << form.getName() <<  " because low grade." << std::endl;
+        std::cout << this->name << " couldn't sign " << form.getName() <<  " because low grade." << std::endl;
 }
 
 // Overloaded output operator
@@ -62,8 +72,11 @@ std::ostream& operator<< (std::ostream &os, const Bureaucrat &bureaucrat) {
     return os;
 }
 
-Bureaucrat& Bureaucrat::operator = (const Bureaucrat& other) {
-    this->_grade_ = other.getGrade();
-    this->_name_ = other.getName();
+Bureaucrat& Bureaucrat::operator = (const Bureaucrat& o) {
+    CheckGrade(o.getGrade());
+    // We cannot assign to 'name' because it's a constant,
+    if (this != &o) {
+        this->grade = o.getGrade();
+    }
     return *this;
 }

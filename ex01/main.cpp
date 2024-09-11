@@ -8,12 +8,12 @@
 int main() {
     {
         try {
-            Bureaucrat Evelyn("Evelyn Hardcastle", 148);
+            Bureaucrat Evelyn("Evelyn Hardcastle", 99);
             Bureaucrat Percival("Percival Thorne", 15);
             Bureaucrat Harriet("Harriet Wexley", 70);
             Bureaucrat Mortimer("Mortimer Finch", 1);
 
-            Form form1("TEST", false, 150, 151);
+            Form form1("TEST", false, 100, 150);
             Form form2("TEST2", false, 30, 10);
 
 
@@ -39,7 +39,7 @@ int main() {
         }
         catch(const std::exception& e)
         {
-            std::cerr << e.what() << std::endl;
+            std::cerr << "Exception: " << e.what() << std::endl;
         }
     }
     return 0;

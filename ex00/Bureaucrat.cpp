@@ -30,14 +30,12 @@ void Bureaucrat::setGrade(const short g) {
     this->grade = g;
 }
 
-
 // Increment grade
 void Bureaucrat::incrementGrade() {
     checkGrade(grade - 1);
     --grade;
 }
 
-// Decrement grade
 void Bureaucrat::decrementGrade() {
     checkGrade(grade + 1);
     ++grade;
@@ -68,11 +66,10 @@ std::ostream& operator<<(std::ostream &os, const Bureaucrat &bureaucrat) {
 
 Bureaucrat& Bureaucrat::operator =(const Bureaucrat& o)
 {
+    checkGrade(o.getGrade());
     // We cannot assign to 'name' because it's a constant,
     if (this != &o) {
-        grade = o.grade;
+        this->grade = o.getGrade();
     }
     return *this;
 }
-
-//std::ostream& operator<<(std::ostream &os, const Bureaucrat &bureaucrat);

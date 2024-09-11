@@ -6,14 +6,16 @@
 
 class Bureaucrat {
     private:
-        std::string _name_;
-        short _grade_;
+        const std::string name;
+        short grade;
 
     public:
+        Bureaucrat();
         Bureaucrat(const std::string &name, unsigned short grade);
         ~Bureaucrat();
         const std::string& getName() const;
         short getGrade() const;
+        void setGrade(const short g);
 
         void incrementGrade();
         void decrementGrade();
@@ -30,7 +32,7 @@ class Bureaucrat {
                 virtual const char* what() const throw();
         };
         void signForm(const Form& form) const;
-        Bureaucrat& operator =(const Bureaucrat& other);
+        Bureaucrat& operator =(const Bureaucrat& o);
 };
 
 std::ostream& operator<<(std::ostream &os, const Bureaucrat &bureaucrat);

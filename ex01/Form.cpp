@@ -11,12 +11,12 @@ Form::Form(const std::string &name, bool gradeToSign, int gradeRequiredToSign, i
 }
 
 // Copy constructor
-Form::Form(const Form &other) : name(other.name), signedStatus(other.signedStatus), gradeRequiredToSign(other.gradeRequiredToSign), gradeRequiredToExecute(other.gradeRequiredToExecute) {}
+Form::Form(const Form &o) : name(o.name), signedStatus(o.signedStatus), gradeRequiredToSign(o.gradeRequiredToSign), gradeRequiredToExecute(o.gradeRequiredToExecute) {}
 Form::~Form() {}
 
 // Getters
 const std::string &Form::getName() const { return this->name; }
-bool Form::getSigned() const { return this->signedStatus; }
+bool Form::getSignedStatus() const { return this->signedStatus; }
 int Form::getGradeRequiredToSign() const { return this->gradeRequiredToSign; }
 int Form::getGradeRequiredToExecute() const { return this->gradeRequiredToExecute; }
 
@@ -44,17 +44,17 @@ const char* Form::GradeTooHighException::what() const throw() {
     return "Error: Form: Grade is too high!";
 }
 
-Form& Form::operator =(const Form& other)
+Form& Form::operator =(const Form& o)
 {
-    if (this == &other)
-        return *this;
-    this->signedStatus = other.getSigned();
+    if (this != &o) {
+        this->signedStatus = o.getSignedStatus();
+    }
     return *this;
 }
 
 std::ostream& operator <<(std::ostream &os, const Form& obj)
 {
     os << obj.getName() << ", form GradeExec " << obj.getGradeRequiredToExecute() << ", ";
-    os << "form GradeSign " << obj.getGradeRequiredToSign() << ", form sined " << obj.getSigned() << ".";
+    os << "form GradeSign " << obj.getGradeRequiredToSign() << ", form sined " << obj.getSignedStatus() << ".";
     return (os);
 }
