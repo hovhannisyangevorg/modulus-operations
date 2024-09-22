@@ -17,8 +17,11 @@ OBJS_CMD := $(patsubst $(CMD_DIR)/%.cpp,$(BUILD_DIR)/$(CMD_DIR)/%.o,$(CMDS))
 CPP := c++
 CPPFLAGS := -Wall -Wextra -Werror -std=c++98 -I $(INC_DIR)
 
+UNUSED := -Wno-unused-parameter
+
+
 all: $(NAME)
-	@./conversion
+
 
 $(CMD_OUT_DIR)/%.o: $(CMD_DIR)/%.cpp $(INCS)  | $(CMD_OUT_DIR)
 	@$(CPP) $(CPPFLAGS) -c $< -o $@
