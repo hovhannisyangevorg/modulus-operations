@@ -1,12 +1,8 @@
 #include "../incs/ScalarParser.hpp"
 
 #include <string>
-#include <iostream>
 #include <sstream>
 #include <limits>
-
-#include "../incs/ScalarPrinter.hpp"
-
 
 ScalarParser::ScalarParser() : validator(NULL), isSuccess(false) {}
 ScalarParser::~ScalarParser() {}
@@ -46,7 +42,7 @@ const char* ScalarParser::ScalarParserException::what() throw() {
 }
 
 void ScalarParser::Parse(t_type type) {
-    ScalarPrinter pr(this->validator); // get in printer constructor to get validator
+    ScalarPrinter pr(this->validator);
 
         isSuccess = false;
         switch (type) {
@@ -107,7 +103,6 @@ int     ScalarParser::ScalarParserInt() {
     if (iss.fail() || !iss.eof()) {
         throw ScalarParserException(INT, "impossible");
     }
-//    if (literal.si)
     if (vul < std::numeric_limits<int>::min() || vul > std::numeric_limits<int>::max())
         throw ScalarParserException(INT, "impossible");
 

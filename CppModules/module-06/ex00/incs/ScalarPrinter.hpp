@@ -1,16 +1,9 @@
-//
-// Created by gehovhan on 9/21/24.
-//
-
 #ifndef SCALARPRINTER_HPP
 #define SCALARPRINTER_HPP
 
 #include <iostream>
 #include "../incs/ScalaValidator.hpp"
 #include "../incs/ScalarParser.hpp"
-
-//class ScalarParser;
-
 
 class ScalarPrinter {
 private:
@@ -40,4 +33,4 @@ public:
     std::string GetDouble() const;
 };
 
-#endif //SCALARPRINTER_HPP
+#endif

@@ -19,9 +19,3 @@ void ScalaValidator::validate() {
     if (this->variable.GetType() == UNKNOWN)
         throw  std::runtime_error("ScalaValidator: Validation Failed.");
 }
-
-
-//ScalaValidator &ScalaValidator::operator=(const ScalarValidator &)
-//{
-//    return <#initializer#>;
-//}

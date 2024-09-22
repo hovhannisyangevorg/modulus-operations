@@ -1,7 +1,6 @@
 #include "../incs/ScalarConverter.hpp"
 #include "../incs/ScalaValidator.hpp"
-#include "ScalarParser.hpp"
-#include <../incs/ScalarParser.hpp>
+#include "../incs/ScalarParser.hpp"
 
 // Constructors
 ScalarConverter::ScalarConverter() {}
