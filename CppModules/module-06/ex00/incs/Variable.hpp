@@ -4,7 +4,7 @@
 #include <iostream>
 
 typedef enum s_type {
-    CHAR    = 0,
+    CHAR,
     INT,
     FLOAT,
     DOUBLE,

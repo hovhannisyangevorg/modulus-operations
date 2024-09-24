@@ -19,7 +19,7 @@ const ScalaValidator* ScalarParser::GetValidator() const {
     return this->validator;
 }
 
-const char* ScalarParser::ScalarParserException::what() throw() {
+const char* ScalarParser::ScalarParserException::what() const throw() {
     ScalarPrinter p;
 
     switch (this->type) {
@@ -35,7 +35,8 @@ const char* ScalarParser::ScalarParserException::what() throw() {
     case CHAR:
         this->formattedString = p.GetCharacter();
         break;
-    default: break;
+    default:
+        break;
     }
     this->formattedString += this->message;
     return this->formattedString.c_str();
@@ -47,7 +48,6 @@ void ScalarParser::Parse(t_type type) {
         isSuccess = false;
         switch (type) {
         case CHAR: {
-
             char vul = this->ScalarParserChar();
             pr.PrintChar(vul);
             isSuccess = true;
@@ -81,12 +81,18 @@ void ScalarParser::Parse(t_type type) {
 }
 
 char    ScalarParser::ScalarParserChar() {
+
     std::string literal = this->validator->getVariable().GetLiteral();
 
-    if (!literal.empty()) {
+    if (literal.length() > 1) {
+        int vul;
+        std::istringstream iss(literal);
+        iss >> vul;
+        return static_cast<char>(vul);
+    } else if (literal.length() == 1){
         return literal.at(0);
-    }
-    throw ScalarParserException(CHAR, "impossible");
+    } else
+        throw ScalarParserException(CHAR, "impossible");
 }
 
 int     ScalarParser::ScalarParserInt() {
@@ -117,6 +123,8 @@ float   ScalarParser::ScalarParserFloat() {
         throw ScalarParserException(FLOAT, "impossible");
     }
 
+
+    literal.erase(literal.length() - 1, 1);
     std::istringstream iss(literal);
     iss >> vul;
 

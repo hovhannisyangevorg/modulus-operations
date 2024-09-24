@@ -35,6 +35,11 @@ void Variable::FindType() {
     const size_t minFloatSize = 3;
     const size_t minDoubleSize = 2;
 
+//    if (literal.length() == 1) {
+//        this->SetType(CHAR);
+//        return ;
+//    }
+
     if (literal == "inf" || literal == "+inf" || literal == "-inf" || literal == "nan") {
         this->SetType(DOUBLE);
         return ;
@@ -43,20 +48,28 @@ void Variable::FindType() {
         this->SetType(FLOAT);
         return ;
     }
-        while (i < literal.length() && std::isspace(static_cast<unsigned char>(literal[i])))
-            ++i;
+    while (i < literal.length() && std::isspace(static_cast<unsigned char>(literal[i]))) {
+        ++i;
+    }
 
-        if (literal[i] == '+' || literal[i] == '-')
-            ++i;
-        std::string remaining = literal.substr(i);
-        if (isdigit(remaining[i]) && (remaining.find(".", i) != std::string::npos) && (remaining.find("f", i) != std::string::npos) && remaining.length() > minFloatSize)
-            this->SetType(FLOAT);
-        else if (isdigit(remaining[i]) && (remaining.find(".", i) != std::string::npos) && remaining.length() > minDoubleSize)
-            this->SetType(DOUBLE);
-        else if ((isdigit(remaining[i]) && (remaining.find(".", i) == std::string::npos) && (remaining.find("f", i) == std::string::npos)))
-            this->SetType(INT);
-        else if (remaining.length() == 1)
-            this->SetType(CHAR);
-        else
-            this->SetType(UNKNOWN);
+    if ((literal[i] == '+' || literal[i] == '-') && (literal.length() != 1)) {
+        ++i;
+    }
+
+    std::string remaining = literal.substr(i);
+    if (isdigit(remaining[0]) && (remaining.find(".", 0) != std::string::npos) && (remaining.find("f", 0) != std::string::npos) && remaining.length() > minFloatSize) {
+        this->SetType(FLOAT);
+    }
+    else if (isdigit(remaining[0]) && (remaining.find(".", 0) != std::string::npos) && remaining.length() > minDoubleSize) {
+        this->SetType(DOUBLE);
+    }
+    else if ((isdigit(remaining[0]) && (remaining.find(".", 0) == std::string::npos) && (remaining.find("f", 0) == std::string::npos))) {
+        this->SetType(INT);
+    }
+    else if (remaining.length() == 1) {
+        this->SetType(CHAR);
+    }
+    else {
+        this->SetType(UNKNOWN);
+    }
 }

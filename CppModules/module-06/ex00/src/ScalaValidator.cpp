@@ -5,17 +5,14 @@
 ScalaValidator::ScalaValidator() : variable() {}
 ScalaValidator::~ScalaValidator() {}
 ScalaValidator::ScalaValidator(const std::string& literal) : variable(literal) {}
-
 ScalaValidator::ScalaValidator(const ScalaValidator& v) : variable(v.variable) {}
-
-ScalaValidator& ScalaValidator::operator=(const ScalaValidator &)
-{
-    return *this;
-}
+ScalaValidator& ScalaValidator::operator=(const ScalaValidator &) { return *this; }
 
 void ScalaValidator::validate() {
     this->variable.FindType();
-
-    if (this->variable.GetType() == UNKNOWN)
+//    std::cout <<
+    if (this->variable.GetType() == UNKNOWN) {
+//        std::cout << "Hiiiiiiiiiiii\n";
         throw  std::runtime_error("ScalaValidator: Validation Failed.");
+    }
 }

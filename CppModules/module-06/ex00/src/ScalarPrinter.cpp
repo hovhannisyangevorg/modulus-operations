@@ -1,5 +1,26 @@
 #include "../incs/ScalarPrinter.hpp"
 #include <limits>
+#include <iomanip>
+
+
+
+bool isNearEqual(double a) {
+    double integer_part = static_cast<int>(a);
+    double float_part = a - integer_part;
+    if (float_part > 0.5)
+        integer_part = integer_part + 1.0;
+    else if (float_part < -0.5)
+        integer_part = integer_part - 1.0;
+    if (a > integer_part) {
+        double tmp = a;
+        a = integer_part;
+        integer_part = tmp;
+    }
+    if (integer_part - a < 1e-6)
+        return true;
+    return false;
+}
+
 
 ScalarPrinter::ScalarPrinter() : validator(NULL), Character("char: "), Integer("int: "), Float("float: "), Double("double: ") {}
 
@@ -18,13 +39,20 @@ const ScalaValidator* ScalarPrinter::GetValidator() const {
 void ScalarPrinter::PrintChar(char literal) {
 
     std::cout << this->Character;
-    if (literal >= 0 && literal < 32)
+    // TODO: refactor
+
+
+//    if (literal >= 0 && literal < 32)
+//        std::cout << "Non displayable" << std::endl;
+
+
+    if (!std::isprint(static_cast<unsigned char>(literal)))
         std::cout << "Non displayable" << std::endl;
     else
         std::cout << "'" << literal << "'" << std::endl;
     std::cout << this->Integer << static_cast<int>(literal) << std::endl;
     std::cout << this->Float << static_cast<float>(literal) << ".0f" << std::endl;
-    std::cout << this->Double << static_cast<double>(literal) << std::endl;
+    std::cout << this->Double << static_cast<double>(literal) << ".0" << std::endl;
 }
 
 
@@ -40,7 +68,7 @@ void ScalarPrinter::PrintInt(int literal) {
         std::cout << static_cast<char>(literal) << std::endl;
     std::cout << this->Integer << literal << std::endl;
     std::cout << this->Float << static_cast<float>(literal) << ".0f" << std::endl;
-    std::cout << this->Double << static_cast<double>(literal) << std::endl;
+    std::cout << this->Double << static_cast<double>(literal) << ".0" << std::endl;
 }
 
 void ScalarPrinter::PrintFloat(float literal) {
@@ -58,8 +86,9 @@ void ScalarPrinter::PrintFloat(float literal) {
     else
     {
         std::cout << this->Character;
-        if (literal < 0.0f || literal > 127.0f)
+        if (literal < -128.0f || literal > 127.0f) {
             std::cout << "impossible" << std::endl;
+        }
         else if (literal >= 0 && literal < 32)
             std::cout << "Non displayable" << std::endl;
         else
@@ -70,9 +99,19 @@ void ScalarPrinter::PrintFloat(float literal) {
         else {
             std::cout << this->Integer << static_cast<int>(literal) << std::endl;
         }
-        std::cout << this->Integer << static_cast<int>(literal) << std::endl;
-        std::cout << this->Float << literal << "f" << std::endl;
-        std::cout << this->Double << static_cast<double>(literal) << std::endl;
+        std::cout << this->Float << literal;
+        if (isNearEqual(literal)) {
+            std::cout << ".0f";
+        }
+        else {
+            std::cout << "f";
+        }
+        std::cout << std::endl;
+        std::cout << this->Double << literal;
+        if (isNearEqual(literal)) {
+            std::cout << ".0";
+        }
+        std::cout << std::endl;
     }
 }
 void ScalarPrinter::PrintDouble(double literal) {
@@ -88,7 +127,7 @@ void ScalarPrinter::PrintDouble(double literal) {
     else
     {
         std::cout << this->Character;
-        if (literal < 0.0 || literal > 127.0)
+        if (literal < -128.0 || literal > 127.0)
             std::cout << "impossible" << std::endl;
         else if (literal >= 0 && literal < 32)
             std::cout << "Non displayable" << std::endl;
@@ -100,8 +139,19 @@ void ScalarPrinter::PrintDouble(double literal) {
         else {
             std::cout << this->Integer << static_cast<int>(literal) << std::endl;
         }
-        std::cout << this->Float << static_cast<float>(literal) << "f" << std::endl;
-        std::cout << this->Double << literal << std::endl;
+        std::cout << this->Float << literal;
+        if (isNearEqual(literal)) {
+            std::cout << ".0f";
+        }
+        else {
+            std::cout << "f";
+        }
+        std::cout << std::endl;
+        std::cout << this->Double << literal;
+        if (isNearEqual(literal)) {
+            std::cout << ".0";
+        }
+       std::cout << std::endl;
     }
 }
 

@@ -14,15 +14,15 @@ private:
 public:
     ScalarParser();
     ~ScalarParser();
-    ScalarParser(const ScalarParser& s); // copy
-    ScalarParser(const ScalaValidator* variable); // whith argument
+    ScalarParser(const ScalarParser& s);
+    ScalarParser(const ScalaValidator* variable);
     ScalarParser& operator=(const ScalarParser& p);
 
     class ScalarParserException : public std::exception {
     private:
         t_type type;
         const std::string message;
-        std::string formattedString;
+        mutable std::string formattedString;
 
     public:
 
@@ -30,10 +30,8 @@ public:
 
         ScalarParserException(t_type type, const std::string& message) : type(type), message(message), formattedString("") {}
 
-        const char* what() throw();
+        virtual const char* what() const throw();
     };
-
-
 
     const ScalaValidator* GetValidator() const;
     char    ScalarParserChar();
