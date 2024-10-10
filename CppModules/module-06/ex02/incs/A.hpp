@@ -1,0 +1,14 @@
+#ifndef INTRA_UUID_2DDF59B0_C18E_4BBD_AF0A_1C3E61E36935_6056671_GEHOVHAN_A_HPP
+#define INTRA_UUID_2DDF59B0_C18E_4BBD_AF0A_1C3E61E36935_6056671_GEHOVHAN_A_HPP
+
+#include "./Base.hpp"
+
+class A : public Base {
+public:
+    A();
+    A(const A&);
+    A& operator=(const A&);
+    ~A();
+};
+
+#endif //INTRA_UUID_2DDF59B0_C18E_4BBD_AF0A_1C3E61E36935_6056671_GEHOVHAN_A_HPP
